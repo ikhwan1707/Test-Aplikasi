@@ -1,0 +1,24 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class Customer extends Authenticatable
+{
+    use Notifiable;
+    protected $guarded = [];
+
+    //MEMBUAT RELASI KE MODEL DISTRICT.PHP
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+}
